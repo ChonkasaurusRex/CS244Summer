@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="../Frontend/SideMenu.css">
+<html>
+    <head>
+        <script>
+            function openNav() {
+                document.getElementById("mySidebar").style.width = "250px";
+                document.getElementById("mn").style.marginLeft = "250px";
+            }
+            function closeNav() {
+                document.getElementById("mySidebar").style.width = "0";
+                document.getElementById("mn").style.marginLeft = "0";
+            }
+        </script>
+    </head>
+    <body>
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="http://localhost/CS244/Frontend/StudentProfile.php">Profile</a>
+            <a href="http://localhost/CS244/Frontend/StudentCourse.php">Courses</a>
+            <a href="http://localhost/CS244/Frontend/StudentGrades.php">Grades</a>
+            <a href="http://localhost/CS244/Frontend/StudentSchedule.php">Schedule</a>
+            <a href="http://localhost/CS244/Frontend/StudentBus.php">Bus</a>
+            <a href="http://localhost/CS244/Frontend/StudentFees.php">Fees</a>
+        </div>
+    </body>
+</html>

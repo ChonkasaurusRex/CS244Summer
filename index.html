@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="Frontend/nav.css">
+<link rel="stylesheet" type="text/css" href="Frontend/index.css">
+<html>
+    <div id="nav-placeholder"></div>
+    <div id="SideM-placeholder"></div>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script>
+    $.get("Frontend/nav.html", function(data){
+        $("#nav-placeholder").replaceWith(data);
+    });
+    </script>
+    <body>
+        <div id="main">
+            
+            <div class="main-txt">
+                <h1>Your Health Is Our Concern<br></h1>
+            </div>
+            <img src="https://images.pexels.com/photos/4021779/pexels-photo-4021779.jpeg">
+        </div>
+        <br>
+        <p>
+            <div id="crs">
+                <br><br>Available Doctors<br><br>
+                <a href=#doctors><button class="bn">View</button></a>
+            </div>
+            <div id="tch">
+                
+            </div>
+        </p>
+    </body>
+</html>

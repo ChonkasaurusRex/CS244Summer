@@ -1,41 +1,35 @@
 <?php
-    class Patient{
-        private $HospID;
-        private $Email;
-        private $FName;
-        private $LName;
+    include "../Frontend/TopNav.html";
+    require "UserInfo.php";
+    require "User.php";
+    class Patient extends UserInfo implements User{
         private $Age;
         private $Gender;
         private $Ailment;
         private $PersonalPhone;
         private $CustodianPhone;
         private $Address;
-        private $Pass;
-        public function __construct($hid,$fn,$ln,$age,$gen,$add,$em,$pph,$cph,$ail,$pass)
+        public function __construct($hid,$fn,$ln,$em,$pass,$age,$gen,$add,$pph,$cph,$ail)
         {
-            $this->HospID=$hid;
-            $this->Email=$em;
-            $this->FName=$fn;
-            $this->LName=$ln;
+            parent::__construct($hid,$fn,$ln,$em,$pass);
             $this->Age=$age;
             $this->Gender=$gen;
             $this->Ailment=$ail;
             $this->PersonalPhone=$pph;
             $this->CustodianPhone=$cph;
             $this->Address=$add;
-            $this->Pass=$pass;
         }
         public function ShowProfile(){
-            echo $this->HospID;
-            echo $this->FName;
-            echo $this->LName;
-            echo $this->Age;
-            echo $this->Gender;
-            echo $this->Address;
-            echo $this->Email;
-            echo $this->PersonalPhone;
-            echo $this->CustodianPhone;
-            echo $this->Ailment;
+            echo parent::gethospid()."<br>";
+            echo parent::getfn()."<br>";
+            echo parent::getln()."<br>";
+            echo parent::getem()."<br>";
+            echo $this->Age."<br>";
+            echo $this->Gender."<br>";
+            echo $this->Address."<br>";
+            echo $this->PersonalPhone."<br>";
+            echo $this->CustodianPhone."<br>";
+            echo $this->Ailment."<br>";
         }
     }
 ?>
