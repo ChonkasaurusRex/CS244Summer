@@ -1,7 +1,7 @@
 <?php
     class PatientController{
         public function CallPatientFuncs(){
-            include "../Frontend/PatientProfile.php";
+            include "../Frontend/PatientValidation.php";
         }
     }
     $pt=new PatientController();
