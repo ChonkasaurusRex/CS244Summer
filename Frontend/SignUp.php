@@ -1,3 +1,12 @@
+<?php
+    include "../Backend/SignUpInfo.php";
+    function idk(){
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $sp=new SignUpInfo($_POST['fn'],$_POST['ln'],$_POST['em'],$_POST['age'],$_POST['gn'],$_POST['add'],$_POST['pph'],$_POST['cph'],$_POST['ail']);
+            header("Location: ../Frontend/signupmsg.php");
+        }
+    }
+?>
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="../Frontend/lgin.css">
 <link rel="stylesheet" type="text/css" href="../Frontend/nav.css">
@@ -14,7 +23,7 @@
         <div class="lgn">
             <br>
             <h1>Sign Up</h1>
-            <form method="POST" name="add" action="signupmsg.html">
+            <form method="POST" name="add" action="<?php idk(); ?>">
                 First Name: <input type="text" name="fn">
                 <br><br>
                 Last Name: <input type="text" name="ln">

@@ -2,6 +2,19 @@
     session_start();
     include "../Backend/Doctor.php";
     
+    function ShowPatientName($id){
+        $filename='../Invoices/Patient.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if($Arrline[0]==$id){
+                return $Arrline[1]." ".$Arrline[2];
+            }
+        }
+        fclose($file);
+    }
     function CheckApt(Doctor $doc){
         $filename='../Invoices/DocApp.txt';
         $file=fopen($filename, 'a+') or die ('File Inaccesible');
@@ -10,7 +23,7 @@
             $line=fgets($file);
             $Arrline=explode($seperator,$line);
             if($Arrline[0]==$doc->gethospid()){
-                $doc->setApp($Arrline[1],$Arrline[2],$Arrline[3]);
+                $doc->setApp($Arrline[1],$Arrline[2],ShowPatientName($Arrline[3]));
                 echo $doc->getDay()."<br>";
                 echo $doc->getAptT()."<br>";
                 echo $doc->getRP()."<br>";

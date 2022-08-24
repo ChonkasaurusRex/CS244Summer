@@ -1,3 +1,6 @@
+<?php
+    
+?>
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="../Frontend/nav.css">
     <div id="nav-placeholder"></div>
