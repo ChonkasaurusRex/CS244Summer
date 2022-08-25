@@ -1,9 +1,13 @@
 <?php
-    include "../Backend/SignUpInfo.php";
-    function idk(){
+    function signup(){
         if($_SERVER['REQUEST_METHOD']=='POST'){
-            $sp=new SignUpInfo($_POST['fn'],$_POST['ln'],$_POST['em'],$_POST['age'],$_POST['gn'],$_POST['add'],$_POST['pph'],$_POST['cph'],$_POST['ail']);
-            header("Location: ../Frontend/signupmsg.php");
+            $sep='|';
+            $str=$_POST['fn'].$sep.$_POST['ln'].$sep.$_POST['em'].$sep.$_POST['age'].$sep.$_POST['gn'].$sep.$_POST['add'].$sep.$_POST['pph'].$sep.$_POST['cph'].$sep.$_POST['ail'].$sep."\n";
+            $filename='../Invoices/SignUp.txt';
+            $file=fopen($filename, 'a+') or die ('File Inaccesible');
+            fwrite($file, $str);
+            fclose($file);
+            header("Location: ../Backend/SignUpInfo.php");
         }
     }
 ?>
@@ -23,7 +27,7 @@
         <div class="lgn">
             <br>
             <h1>Sign Up</h1>
-            <form method="POST" name="add" action="<?php idk(); ?>">
+            <form method="POST" name="add" action="<?php signup(); ?>">
                 First Name: <input type="text" name="fn">
                 <br><br>
                 Last Name: <input type="text" name="ln">

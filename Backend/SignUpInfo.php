@@ -1,5 +1,6 @@
 <?php
-    Class SignUpInfo{
+    include "../Backend/SignUpNot.php";
+    Class SignUpInfo implements SignUpNot{
         private $Age;
         private $Gender;
         private $Ailment;
@@ -47,5 +48,31 @@
         public function getln(){
             return $this->LName;
         }
+        public function ShowAllInfo(){
+            echo $this->getfn()."<br>";
+            echo $this->getln()."<br>";
+            echo $this->getem()."<br>";
+            echo $this->getage()."<br>";
+            echo $this->getgen()."<br>";
+            echo $this->getadd()."<br>";
+            echo $this->getpph()."<br>";
+            echo $this->getcph()."<br>";
+            echo $this->getail()."<br>";
+        }
     }
+    $filename='../Invoices/SignUp.txt';
+    $file=fopen($filename, 'a+') or die ('File Inaccesible');
+    $seperator="|";
+    while(!feof($file)){
+        $line=fgets($file);
+        $Arrline=explode($seperator,$line);
+        if(array_key_exists(9,$Arrline)){
+            $sp=new SignUpInfo($Arrline[0],$Arrline[1],$Arrline[2],$Arrline[3],$Arrline[4],$Arrline[5],$Arrline[6],$Arrline[7],$Arrline[8],$Arrline[9]);
+        }
+        if(empty($line)==false){
+            $sp->ShowAllInfo();
+            echo "<br>";
+        }
+    }
+    fclose($file);
 ?>

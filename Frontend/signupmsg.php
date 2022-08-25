@@ -1,6 +1,4 @@
-<?php
-    
-?>
+<?php include "../Backend/SignUpInfo.php"; echo $sp->getail(); ?>
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="../Frontend/nav.css">
     <div id="nav-placeholder"></div>

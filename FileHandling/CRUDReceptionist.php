@@ -99,7 +99,6 @@
         }
         fclose($file);
     }
-    function ()
 
     $id_value = $_SESSION['ID'];
     $filename='../Invoices/Receptionist.txt';
