@@ -1,6 +1,7 @@
 <?php
     session_start();
     include "../Backend/Receptionist.php";
+    include "../Backend/SignUpInfo.php";
 
     function AutomateID($filename,$DefualtID){
         $str=$DefualtID."|";
@@ -95,6 +96,23 @@
             $Arrline=explode($seperator,$line);
             foreach($Arrline as $value){
                 echo $value."<br>";
+            }
+        }
+        fclose($file);
+    }
+    function SignUpRecNot(){
+        $filename='../Invoices/SignUp.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if(array_key_exists(9,$Arrline)){
+                $sp=new SignUpInfo($Arrline[0],$Arrline[1],$Arrline[2],$Arrline[3],$Arrline[4],$Arrline[5],$Arrline[6],$Arrline[7],$Arrline[8],$Arrline[9]);
+            }
+            if(empty($line)==false){
+                $sp->ShowAllInfo();
+                echo "<br>";
             }
         }
         fclose($file);

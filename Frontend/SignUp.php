@@ -7,7 +7,7 @@
             $file=fopen($filename, 'a+') or die ('File Inaccesible');
             fwrite($file, $str);
             fclose($file);
-            header("Location: ../Backend/SignUpInfo.php");
+            header("Location: ../Frontend/signupmsg.html");
         }
     }
 ?>

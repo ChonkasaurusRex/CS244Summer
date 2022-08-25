@@ -5,8 +5,8 @@
     <div id="mn">
         <button class="openbtn" onclick="openNav()">&#9776;</button>
         <div id="adm">
-            <h1>Profile</h1>
-            <?php $rp->ShowProfile(); ?>
+            <h1>Notifications</h1>
+            <?php SignUpRecNot(); ?>
         </div>
     </div>
 </html>
