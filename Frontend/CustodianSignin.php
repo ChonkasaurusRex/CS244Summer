@@ -54,38 +54,44 @@
             }
             //Searches for inputted id, email and password in the associated text files, then returns true if found
             function checkuser($file){
-                $IDcheck=$_POST['ID'];
-                $Passcheck=$_POST['pass'];
-                $ct=0;
-                $Err=2;
-                $filetype=fopen($file,'a+') or die ('File Inaccesible');
-                $seperator="|";
-                while(!feof($filetype)){
-                    $line=fgets($filetype);
-                    $Arrline=explode($seperator,$line);
-                    if($Arrline[0]==$IDcheck){
-                        ++$ct;
+                if($_SERVER["REQUEST_METHOD"]=="POST"){
+                    if(isset($_POST['ID']) && isset($_POST['pass'])){
+                        $IDcheck=$_POST['ID'];
+                        $Passcheck=$_POST['pass'];
+                        $ct=0;
+                        $Err=2;
+                        $filetype=fopen($file,'a+') or die ('File Inaccesible');
+                        $seperator="|";
+                        while(!feof($filetype)){
+                            $line=fgets($filetype);
+                            $Arrline=explode($seperator,$line);
+                            if($Arrline[0]==$IDcheck){
+                                ++$ct;
+                                fclose($filetype);
+                                break;
+                            }
+                        }
+                        $filetype=fopen($file,'a+') or die ('File Inaccesible');
+                        $seperator="|";
+                        while(!feof($filetype)){
+                            $line=fgets($filetype);
+                            $Arrline=explode($seperator,$line);
+                            if(array_key_exists(4,$Arrline)){
+                                if($Arrline[4]==$Passcheck){
+                                    ++$ct;
+                                    fclose($filetype);
+                                    break;
+                                }
+                            }
+                        }
+                        if($ct==2){
+                            return $IDcheck;
+                        }
+                        $Err=2;
+                        return $Err;
                         fclose($filetype);
-                        break;
                     }
                 }
-                $filetype=fopen($file,'a+') or die ('File Inaccesible');
-                $seperator="|";
-                while(!feof($filetype)){
-                    $line=fgets($filetype);
-                    $Arrline=explode($seperator,$line);
-                    if($Arrline[4]==$Passcheck){
-                        ++$ct;
-                        fclose($filetype);
-                        break;
-                    }
-                }
-                if($ct==2){
-                    return $IDcheck;
-                }
-                $Err=2;
-                return $Err;
-                fclose($filetype);
             }
         ?>
         <?php
@@ -107,8 +113,7 @@
             <hr class="lnsep"></hr><br>
             <!--This chekcs the user type and redirects to their page after all validation is complete-->
             <form method="post" action="<?php if($red==true && $uval=="p"){
-                header("Location: ../Frontend/PatientProfile.php");
-                $_SESSION['ID'] = $utype;
+                if(isset($_POST['ID']) && isset($_POST['pass'])){header("Location: ../Frontend/PatientProfile.php");}
             }
             elseif ($red==false){
                 echo htmlspecialchars($_SERVER["PHP_SELF"]);

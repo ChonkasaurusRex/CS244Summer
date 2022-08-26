@@ -20,8 +20,8 @@
                 $_SESSION['msg']= "Sorry, file already exists.";
                 $upverify = 0;
             }
-            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-                $_SESSION['msg']= "Only JPG, JPEG, PNG & GIF files are allowed.";
+            if($imageFileType != "jpg") {
+                $_SESSION['msg']= "Only JPG is allowed.";
                 $upverify = 0;
             }
             

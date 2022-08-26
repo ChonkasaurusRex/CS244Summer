@@ -24,12 +24,10 @@
         fclose($file);
         return $incrid+1;
     }
-    function RemoveNot(){
-        $filename="../Invoices/SignUp.txt";
+    function RemoveNot($filename){
         $crl = file($filename);
         $crl[0] = "";
         file_put_contents($filename,$crl);
-        fclose($crl);
     }
     function GeneratePass($id,$fn){
         $pass='|'.$fn.$id.'|';
@@ -57,7 +55,7 @@
         AutomateID($filename,ReadPrevID($filename));
         fwrite($file,$credentials1.GeneratePass(ReadDefID(),$fn).$credentials2."\n");
         fclose($file);
-        RemoveNot();
+        RemoveNot("../Invoices/SignUp.txt");
     }
     function CheckLastLine($filename,$id){
         $file=fopen($filename, 'a+') or die ('File Inaccesible');
@@ -125,14 +123,9 @@
     function ViewPatients(){
         $filename='../Invoices/Patient.txt';
         $file=fopen($filename, 'a+') or die ('File Inaccesible');
-        $seperator="|";
-        $i=0;
         while(!feof($file)){
             $line=fgets($file);
-            $Arrline=explode($seperator,$line);
-            foreach($Arrline as $value){
-                echo $value."<br>";
-            }
+            echo $line."<br><br>";
         }
         fclose($file);
     }
@@ -153,7 +146,24 @@
         }
         fclose($file);
     }
-
+    function AppRecNot(){
+        $filename='../Invoices/AppReq.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        while(!feof($file)){
+            $line=fgets($file);
+            echo $line."<br>";
+        }
+        fclose($file);
+    }
+    function AddApp($credentials,$cred2){
+        $file=fopen("../Invoices/DocApp.txt", 'a+') or die ('File Inaccesible');
+        fwrite($file,$credentials."\n");
+        fclose($file);
+        $file=fopen("../Invoices/CusPat.txt", 'a+') or die ('File Inaccesible');
+        fwrite($file,$cred2."\n");
+        fclose($file);
+        RemoveNot("../Invoices/AppReq.txt");
+    }
     $id_value = $_SESSION['ID'];
     $filename='../Invoices/Receptionist.txt';
     $file=fopen($filename, 'a+') or die ('File Inaccesible');

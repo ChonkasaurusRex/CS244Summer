@@ -7,7 +7,6 @@
         <div id="adm">
             <h1>Profile</h1>
             <?php $pt->ShowProfile(); ShowPhoto($pt); ?><br>
-
         </div>
     </div>
 </html>

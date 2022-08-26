@@ -49,14 +49,14 @@
             return $this->LName;
         }
         public function ShowAllInfo(){
-            echo $this->getfn()."<br>";
-            echo $this->getln()."<br>";
-            echo $this->getem()."<br>";
-            echo $this->getage()."<br>";
-            echo $this->getgen()."<br>";
-            echo $this->getadd()."<br>";
-            echo $this->getpph()."<br>";
-            echo $this->getcph()."<br>";
+            echo $this->getfn()."|";
+            echo $this->getln()."|";
+            echo $this->getem()."|";
+            echo $this->getage()."|";
+            echo $this->getgen()."|";
+            echo $this->getadd()."|";
+            echo $this->getpph()."|";
+            echo $this->getcph()."|";
             echo $this->getail()."<br>";
         }
     }

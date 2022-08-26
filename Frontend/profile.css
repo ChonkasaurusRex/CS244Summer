@@ -1,0 +1,44 @@
+#adm{
+    text-align: center;
+    border-style:double;
+    border-color: rgb(214, 204, 204);
+    border-radius: 25px;
+    border-width: 15px;
+    margin: auto;
+    width: 40%;
+    background-color: #04AA6D;
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: medium;
+    box-sizing: border-box;
+    transition: transform .2s;
+    margin: 0 auto;
+}
+#adm a{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: Black;
+    display: block;
+}
+#adm a:hover{
+    color: #f1f1f1;
+}
+#mn #adm .enroll{
+    color: white;
+    font-size: 12pt;
+    font-family: 'Courier New', monospace;
+    background-color: rgb(39, 5, 75);
+    border-radius: 15px;
+    padding: 7px;
+    width: 150px;
+    height: 50px;
+  }
+  #mn #adm .enroll:hover{
+    background-color: rgba(130, 77, 77,0.3);
+    cursor: pointer;
+  }
+  #mn #adm a.enroll{
+    text-decoration: none;
+    display: inline-block;
+  }

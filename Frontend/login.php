@@ -84,11 +84,13 @@
                 while(!feof($filetype)){
                     $line=fgets($filetype);
                     $Arrline=explode($seperator,$line);
-                    if($Arrline[3]==$Emailcheck){
-                        ++$ct;
-                       
-                        fclose($filetype);
-                        break;
+                    if(array_key_exists(3,$Arrline)){
+                        if($Arrline[3]==$Emailcheck){
+                            ++$ct;
+                        
+                            fclose($filetype);
+                            break;
+                        }
                     }
                 }
                 $filetype=fopen($file,'a+') or die ('File Inaccesible');
@@ -96,10 +98,12 @@
                 while(!feof($filetype)){
                     $line=fgets($filetype);
                     $Arrline=explode($seperator,$line);
-                    if($Arrline[4]==$Passcheck){
-                        ++$ct;
-                        fclose($filetype);
-                        break;
+                    if(array_key_exists(4,$Arrline)){
+                        if($Arrline[4]==$Passcheck){
+                            ++$ct;
+                            fclose($filetype);
+                            break;
+                        }
                     }
                 }
                 if($ct==3){
