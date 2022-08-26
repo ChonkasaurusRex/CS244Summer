@@ -6,7 +6,8 @@
         <button class="openbtn" onclick="openNav()">&#9776;</button>
         <div id="adm">
             <h1>Profile</h1>
-            <?php $pt->ShowProfile(); ?>
+            <?php $pt->ShowProfile(); ShowPhoto($pt); ?><br>
+
         </div>
     </div>
 </html>

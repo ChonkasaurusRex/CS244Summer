@@ -1,2 +1,3 @@
 1011|John|Doe|john@email.com|john1011|15|Male|lane|023456|026543|Asthma|
 1012|Jack|Doe|jack@email.com|jack1012|18|Male|lane|023456|026543|Asthma|
+1013|Ali|Fehr|ziad@email.com|ali1013|19|Male|lane|0123|3210|Asthma|

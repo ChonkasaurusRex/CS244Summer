@@ -2,11 +2,12 @@
     include "../FileHandling/CRUDReceptionist.php";
     include "../Frontend/ReceptionistSideMenu.html";
     function CallFunc(){
-        $cred="";
+        $cred1=$cred2="";
         $s="|";
         if($_SERVER["REQUEST_METHOD"]=="POST"){
-            $cred=$_POST['fn'].$s.$_POST['ln'].$s.$_POST['em'].$s.$_POST['pass'].$s.$_POST['age'].$s.$_POST['gn'].$s.$_POST['add'].$s.$_POST['pph'].$s.$_POST['cph'].$s.$_POST['ail'].$s;
-            AddPatient($cred);
+            $cred1=$_POST['fn'].$s.$_POST['ln'].$s.$_POST['em'];
+            $cred2=$_POST['age'].$s.$_POST['gn'].$s.$_POST['add'].$s.$_POST['pph'].$s.$_POST['cph'].$s.$_POST['ail'].$s;
+            AddPatient($cred1,$cred2,$_POST['fn']);
         }
     }
 ?>
@@ -25,8 +26,6 @@
                 Last Name: <input type="text" name="ln">
                 <br><br>
                 E-mail: <input type="text" name="em">
-                <br><br>
-                Password: <input type="text" name="pass"> <!-- Should it be generated?-->
                 <br><br>
                 Age: <input type="text" name="age">
                 <br><br>

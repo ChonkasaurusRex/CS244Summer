@@ -39,7 +39,10 @@
             header("Location: ../Frontend/PatientProfile.php");
         }
     }
-
+    function ShowPhoto(Patient $pt){
+        $img=strval("../Invoices/PhotoIDs/".$pt->gethospid().".jpg");
+        echo "<img src='$img' alt='img'>";
+    }
     //Recieve ID from login page, searches for it in patient file, then creates an object of the patient
     $id_value = $_SESSION['ID'];
     $filename='../Invoices/Patient.txt';

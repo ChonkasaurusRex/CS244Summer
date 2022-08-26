@@ -24,12 +24,40 @@
         fclose($file);
         return $incrid+1;
     }
-    function AddPatient($credentials){
+    function RemoveNot(){
+        $filename="../Invoices/SignUp.txt";
+        $crl = file($filename);
+        $crl[0] = "";
+        file_put_contents($filename,$crl);
+        fclose($crl);
+    }
+    function GeneratePass($id,$fn){
+        $pass='|'.$fn.$id.'|';
+        return $pass;
+    }
+    function ReadDefID(){
+        $filename="../Invoices/Patient.txt";
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        $val="";
+        while(!feof($file,)){
+            $line=fgets($file);
+            if(empty($line)){
+                break;
+            }
+            $Arrline=explode($seperator,$line);
+            $val=$Arrline[0];
+        }
+        fclose($file);
+        return $val;
+    }
+    function AddPatient($credentials1,$credentials2,$fn=""){
         $filename="../Invoices/Patient.txt";
         $file=fopen($filename, 'a+') or die ('File Inaccesible');
         AutomateID($filename,ReadPrevID($filename));
-        fwrite($file,$credentials."\n");
+        fwrite($file,$credentials1.GeneratePass(ReadDefID(),$fn).$credentials2."\n");
         fclose($file);
+        RemoveNot();
     }
     function CheckLastLine($filename,$id){
         $file=fopen($filename, 'a+') or die ('File Inaccesible');
@@ -47,7 +75,13 @@
             return true;
         }
     }
-    function UpdateUser($filename,$old,$new,$id){
+    function DeleteEmpty($filename){
+        $str=file_get_contents($filename);
+        $str = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $str);
+        file_put_contents($filename,$str);
+    }
+    function UpdateUser($old,$new,$id){
+        $filename="../Invoices/Patient.txt";
         $file=fopen($filename, 'a+') or die ('File Inaccesible');
         $seperator="|";
         $ct=0;
@@ -55,12 +89,12 @@
             $line=fgets($file);
             $Arrline=explode($seperator,$line);
             if($id==$Arrline[0]){
-                $liner=str_replace($old,$new,$line);
+                $liner=preg_replace('/'.$old.'/',$new,$line,1);
                 $crl = file( $filename, FILE_IGNORE_NEW_LINES );
                 $crl[$ct] = $liner;
                 file_put_contents($filename, implode("\n", $crl));
                 if(CheckLastLine($filename,$id)!=true){
-                    file_put_contents($filename, implode("", $crl));
+                   file_put_contents($filename, implode("\n", $crl));
                 }
                 break;
             }
@@ -68,8 +102,10 @@
         }
         fwrite($file,"\n");
         fclose($file);
+        DeleteEmpty($filename);
     }
-    function DeleteUser($filename,$id){
+    function DeleteUser($id){
+        $filename="../Invoices/Patient.txt";
         $file=fopen($filename, 'a+') or die ('File Inaccesible');
         $seperator="|";
         $ct=0;
