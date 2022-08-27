@@ -109,7 +109,7 @@
         ?>
         <hr id="navsep"></hr>
         <div class="lgn">
-            <h1 id="ln">Sign In</h1>
+            <h1 id="ln">Custodian Sign In</h1>
             <hr class="lnsep"></hr><br>
             <!--This chekcs the user type and redirects to their page after all validation is complete-->
             <form method="post" action="<?php if($red==true && $uval=="p"){

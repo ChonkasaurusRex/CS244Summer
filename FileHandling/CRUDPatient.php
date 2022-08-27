@@ -69,7 +69,120 @@
         $img=strval("../Invoices/PhotoIDs/".$pt->gethospid().".jpg");
         echo "<img src='$img' alt='No Photo ID Available'>";
     }
-    
+    function GetDocLName($id){
+        $filename='../Invoices/Doctor.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if(array_key_exists(2,$Arrline)){
+                if($Arrline[0]==$id){
+                    return $Arrline[2];
+                }
+            }
+        }
+        fclose($file);
+    }
+    function GetDocFName($id){
+        $filename='../Invoices/Doctor.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if(array_key_exists(2,$Arrline)){
+                if($Arrline[0]==$id){
+                    return $Arrline[1];
+                }
+            }
+        }
+        fclose($file);
+    }
+    function ShowApp(Patient $pt){
+        $filename='../Invoices/DocApp.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if(array_key_exists(3,$Arrline)){
+                if($Arrline[3]==$pt->gethospid()){
+                    $pt->SetPatApp(GetDocFName($Arrline[0]),GetDocLName($Arrline[0]),$Arrline[1],$Arrline[2]);
+                    $pt->ShowAllApp();
+                    echo "<hr><br>";
+                }
+            }
+        }
+        fclose($file);
+    }
+    function CusMeet($pid){
+        $filename='../Invoices/CusMeetings.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if(array_key_exists(3,$Arrline)){
+                if($Arrline[0]==$pid){
+                    echo $line."<br>";
+                }
+            }
+        }
+        fclose($file);
+    }
+    function SearchCus(Patient $pt){
+        $filename='../Invoices/CusPat.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if(array_key_exists(1,$Arrline)){
+                if($Arrline[0]==$pt->gethospid()){
+                    CusMeet($pt->gethospid());
+                }
+            }
+        }
+        fclose($file);
+    }
+    function SendMSG($rid,$msg){
+        $str=$rid.'|'.$msg.'|';
+        $file=fopen("../Invoices/RecMsg.txt", 'a+') or die ('File Inaccesible');
+        fwrite($file,$str."\n");
+        fclose($file);
+    }
+    function CheckCus(Patient $pt,$rid,$msg){
+        $filename='../Invoices/CusMsg.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if(array_key_exists(1,$Arrline)){
+                if($Arrline[0]==$pt->gethospid()){
+                    SendMSG($rid,$msg);
+                }
+            }
+        }
+        fclose($file);
+    }
+    function CheckMsg(Patient $pt){
+        $filename='../Invoices/CusMsg.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if(array_key_exists(1,$Arrline)){
+                if($Arrline[0]==$pt->gethospid()){
+                    echo $Arrline[1]."<br>";
+                }
+            }
+        }
+        fclose($file);
+    }
+
     //Recieve ID from login page, searches for it in patient file, then creates an object of the patient
     $id_value = $_SESSION['ID'];
     $filename='../Invoices/Patient.txt';

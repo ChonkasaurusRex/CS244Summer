@@ -4,6 +4,7 @@
     require "User.php";
     require "Custodian.php";
     require "PatientInfo.php";
+    require "PatApp.php";
     class Patient extends UserInfo implements User{
         private $Age;
         private $Gender;
@@ -13,6 +14,9 @@
         private $Address;
         use Custodian{
             Custodian::__construct as cus;
+        }
+        use PatApp{
+            PatApp::__construct as patapp;
         }
         use Information;
         public function __construct($hid,$fn,$ln,$em,$pass,$age,$gen,$add,$pph,$cph,$ail)
@@ -27,6 +31,9 @@
         }
         public function SetCustodian($pid,$ppass){
             $this->cus($pid,$ppass);
+        }
+        public function SetPatApp($dfn,$dln,$day,$tm){
+            $this->patapp($dfn,$dln,$day,$tm);
         }
         public function ShowProfile(){
             echo parent::gethospid()."<br>";

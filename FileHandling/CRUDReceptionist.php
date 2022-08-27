@@ -164,6 +164,74 @@
         fclose($file);
         RemoveNot("../Invoices/AppReq.txt");
     }
+    function WriteMeetingCus($pid,$did,$day,$time){
+        $str=$pid.'|'.$did.'|'.$day.'|'.$time.'|';
+        $file=fopen("../Invoices/CusMeetings.txt", 'a+') or die ('File Inaccesible');
+        fwrite($file,$str."\n");
+        fclose($file);
+        RemoveNot("../Invoices/MeetNot.txt");
+    }
+    function ScheduleMeeting($pid,$day,$time,$did){
+        $filename='../Invoices/MeetNot.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if(array_key_exists(1,$Arrline)){
+                if($Arrline[0]==$pid){
+                    WriteMeetingCus($pid,$did,$day,$time);
+                }
+            }
+        }
+        fclose($file);
+    }
+    function ShowMeetNot(){
+        $filename='../Invoices/MeetNot.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        while(!feof($file)){
+            $line=fgets($file);
+            echo $line."<br>";
+        }
+        fclose($file);
+    }
+    function SendMSG($pid,$msg){
+        $str=$pid.'|'.$msg.'|';
+        $file=fopen("../Invoices/CusMsg.txt", 'a+') or die ('File Inaccesible');
+        fwrite($file,$str."\n");
+        fclose($file);
+    }
+    function CheckCus($pid,$msg){
+        $filename='../Invoices/CusPat.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if(array_key_exists(1,$Arrline)){
+                if($Arrline[0]==$pid){
+                    SendMSG($pid,$msg);
+                }
+            }
+        }
+        fclose($file);
+    }
+    function CheckMsg(Receptionist $rp){
+        $filename='../Invoices/RecMsg.txt';
+        $file=fopen($filename, 'a+') or die ('File Inaccesible');
+        $seperator="|";
+        while(!feof($file)){
+            $line=fgets($file);
+            $Arrline=explode($seperator,$line);
+            if(array_key_exists(1,$Arrline)){
+                if($Arrline[0]==$rp->gethospid()){
+                    echo $Arrline[1]."<br>";
+                }
+            }
+        }
+        fclose($file);
+    }
+
     $id_value = $_SESSION['ID'];
     $filename='../Invoices/Receptionist.txt';
     $file=fopen($filename, 'a+') or die ('File Inaccesible');

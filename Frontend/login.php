@@ -147,11 +147,11 @@
                 }
             }
             elseif($intype=="Quality Manager"){
-                if(checkuser('../Invoices/QualityManager.txt') == 3 && $_POST['ID'] != ""){
+                if(checkuser('../Invoices/QualMan.txt') == 3 && $_POST['ID'] != ""){
                     $IDerr="Paramaters Invalid";
                 }
                 else{
-                    $utype=checkuser('../Invoices/QualityManager.txt');
+                    $utype=checkuser('../Invoices/QualMan.txt');
                     $uval="q";
                 }
             }
@@ -174,7 +174,7 @@
                 $_SESSION['ID'] = $utype;
             }
             elseif($red==true && $uval=="q"){
-                header("Location: ../LinkQualityManager.php");
+                header("Location: ../Controller/LinkQualityManager.php");
                 $_SESSION['ID'] = $utype;
             }
             elseif ($red==false){
@@ -199,7 +199,7 @@
                     <option value="Quality Manager">Quality Manager</option>
                 </select> <br><br>
                 <input type="submit" name="submit" value="Sign In" class="lnbutton"><br><br>
-                <a class="fp" href="http://localhost/CS244Summer/Frontend/EmNewPass.php">Forgot Password?<br><br>
+                <a class="fp" href="../Frontend/EmNewPass.php">Forgot Password?<br><br>
                 </form>
             </div>
         </div>
